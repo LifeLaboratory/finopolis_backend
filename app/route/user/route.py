@@ -23,13 +23,15 @@ class Auth(BaseRouter):
 class Register(BaseRouter):
     def __init__(self):
         super().__init__()
-        self.args = [names.LOGIN, names.PASSWORD, names.NAME]
+        self.args = [names.LOGIN, names.PASSWORD, names.FIO, names.DESCRIPTION, names.PHOTO]
 
     def post(self):
         self._read_args()
         if ' ' in self.data.get(names.LOGIN) \
             or ' ' in self.data.get(names.PASSWORD) \
-            or '' == self.data.get(names.NAME):
+            or '' == self.data.get(names.FIO) \
+            or '' == self.data.get(names.PHOTO) \
+            or '' == self.data.get(names.DESCRIPTION):
             return {}
         answer = register(self.data)
         return answer or {}

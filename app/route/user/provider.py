@@ -5,22 +5,21 @@ class Provider:
     @staticmethod
     def auth_user(args):
         query = """
-    select id_user
-    from users
-    where ("login" = '{login}'
-      and "password" = '{password}'
+    select "@лицо"
+    from "лицо"
+    where ("логин" = '{логин}'
+      and "пароль" = '{пароль}'
       )
                 """
-        # print(query)
         return Sql.exec(query=query, args=args)
 
     @staticmethod
     def check_user(args):
         query = """
   select 1
-  from users
-  where ("login" = '{login}'
-    and "password" = '{password}'
+  from "лицо"
+  where ("логин" = '{логин}'
+    and "пароль" = '{пароль}'
     )
         """
         return Sql.exec(query=query, args=args)
@@ -28,11 +27,13 @@ class Provider:
     @staticmethod
     def register_user(args):
         query = """
-    insert into "users"("login", "password", "name") 
-    VALUES ('{login}', 
-    '{password}', 
-    '{name}')
-    returning id_user
+    insert into "лицо"("логин", "пароль", "фио", "описание", "фото") 
+    VALUES ('{логин}', 
+    '{пароль}', 
+    '{фио}',
+    '{описание}',
+    '{фото}')
+    returning "@лицо"
     """
         print(query)
         return Sql.exec(query=query, args=args)
