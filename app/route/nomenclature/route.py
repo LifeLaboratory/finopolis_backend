@@ -8,7 +8,8 @@ class Nomenclature(BaseRouter):
 
     def __init__(self):
         super().__init__()
-        self.args = [names.post_id, names.post_title, names.post_text,
+        self.args = [names.post_id, names.post_title, names.post_text, names.face_id, names.nom_name, names.nom_text,
+                     names.nom_price, names.nom_category, names.face,
                      names.post_photo, names.it, names.date_time, names.post_deleted, names.post_draft]
 
     def get(self):

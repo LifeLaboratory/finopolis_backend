@@ -7,7 +7,7 @@ class Provider:
         query = """
     select *
     from "номенклатура"
-    where "@номенклатура" = {@номенклатура} and "лицо" = {@лицо}
+    where "номенклатура" = {номенклатура} and "лицо" = {@лицо}
     """
         return Sql.exec(query=query, args=args)
 
@@ -31,9 +31,9 @@ class Provider:
         , цена = '{цена}'
         , фото = '{фото}'
         , лицо = '{лицо}'
-        , удален = '{удален}'
-      where "@номенклатура" = {@номенклатура}
-      returning "@номенклатура"
+        , удален = {удален}
+      where "номенклатура" = {номенклатура}
+      returning "номенклатура"
     """
         return Sql.exec(query=query, args=args)
 
@@ -47,8 +47,8 @@ class Provider:
         '{цена}',
         '{фото}',
         '{лицо}',
-        '{удален}'
+        {удален}
         )
-        returning "@номенклатура"
+        returning "номенклатура"
         """
         return Sql.exec(query=query, args=args)

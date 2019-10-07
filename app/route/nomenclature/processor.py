@@ -15,6 +15,12 @@ def get_nomenclature(args):
 
 def update_nomenclature(args):
     provider = Provider()
+    for field in names.nom_field:
+        if args.get(field) is None:
+            if field in names.double_prec:
+                args[field] = 0.0
+            else:
+                args[field] = 'NULL'
     if args.get(names.nom_id):
         answer = provider.update_nomenclature(args)[0]
     else:
