@@ -7,7 +7,7 @@ SESSION = 'session'
 
 DESCRIPTION = "описание"
 FIO = "фио"
-TITLE = "title"
+TITLE = "заголовок"
 URL = "url"
 PHOTO = "фото"
 CARD = "card"
@@ -49,7 +49,7 @@ PAGE = "page"
 ID_NEWS = "id_news"
 BUDGET = "budget"
 RATE = "rate"
-
+LINK = "ссылка"
 
 ERROR_EXECUTE_DATABASE = "Fatal error: execute database"
 ERROR_CONNECT_DATABASE = "Error connect database"
