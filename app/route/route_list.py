@@ -8,5 +8,4 @@ ROUTES = {
     '/auth': Auth,
     '/post': Posts,
     '/profile/<int:id_user>': Profile,
-
 }

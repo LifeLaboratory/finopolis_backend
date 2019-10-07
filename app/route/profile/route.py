@@ -8,8 +8,7 @@ class Profile(BaseRouter):
 
     def __init__(self):
         super().__init__()
-        self.args = [names.LOGIN, names.PASSWORD, names.NAME,
-                     names.DESCRIPTION, names.TITLE, names.PHOTO, names.CARD]
+        self.args = [names.FIO, names.DESCRIPTION, names.PHOTO, names.STATUS]
 
     def get(self, id_user):
         args = {
@@ -18,7 +17,9 @@ class Profile(BaseRouter):
         answer = get_profile(args)
         return answer or {}
 
-    def post(self):
+    def put(self, id_user):
         self._read_args()
+        self.data.update({names.ID_USER: id_user})
+        print(self.data)
         answer = update_profile(self.data)
         return answer or {}
