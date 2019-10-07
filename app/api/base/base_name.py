@@ -98,6 +98,15 @@ position = 'Должность'
 attestor = 'Свидетель'
 inn_attestor = 'СвидетельИНН'
 
+post_id = "@пост"
+post_title = "заголовок"
+post_text = "текст"
+post_photo = "фото"
+it = "номенклатура"
+date_time = "датавремя"
+post_deleted = 'удален'
+post_draft = 'черновик'
+
 
 print_form_fields = [
     INN,
