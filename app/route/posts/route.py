@@ -8,7 +8,7 @@ class Posts(BaseRouter):
 
     def __init__(self):
         super().__init__()
-        self.args = [names.post_id, names.post_title, names.post_text, names.face_id,
+        self.args = [names.post_id, names.post_title, names.post_text, names.face_id, names.face,
                      names.post_photo, names.it, names.date_time, names.post_deleted, names.post_draft]
 
     def get(self):

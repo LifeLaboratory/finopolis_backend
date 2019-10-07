@@ -1,6 +1,6 @@
 from app.route.posts.provider import Provider
 from app.api.base import base_name as names
-
+from datetime import datetime as dt
 
 def get_post(args):
     answer = None
@@ -27,11 +27,17 @@ def get_nomenclature(data):
     for field in names.nom_field:
         nomenclature[field] = data.get(field)
         data.pop(field)
-        data['номенклатура'] = nomenclature
+        data['товар'] = nomenclature
 
 
 def update_post(args):
     provider = Provider()
+    for field in names.post_fields:
+        if args.get(field) is None:
+            if field in names.date_time_fields:
+                args[field] = dt.now()
+            else:
+                args[field] = 'NULL'
     if args.get(names.post_id):
         answer = provider.update_post(args)[0]
     else:

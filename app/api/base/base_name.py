@@ -120,8 +120,11 @@ socnet_id = '@соцсеть'
 socnet = 'соцсеть'
 
 qty = 'количество'
-nom_field = [nom_id, nom_name, nom_text, nom_category, nom_price, nom_photo]
-
+nom_field = [nom_name, nom_text, nom_category, nom_price, nom_photo, post_deleted]
+post_fields = [post_draft, post_deleted, post_photo, post_text, post_title, date_time]
+double_prec = [nom_price]
+bool = [post_deleted, post_draft]
+date_time_fields = [date_time]
 face_id = "@лицо"
 
 print_form_fields = [
