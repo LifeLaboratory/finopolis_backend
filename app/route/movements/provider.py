@@ -33,7 +33,7 @@ class Provider:
              else null::integer 
              end "прибыль"
         from "движение" mov
-        left join "номенклатура" n on n."@номенклатура" = mov."номенклатура"
+        left join "номенклатура" n on n."номенклатура" = mov."номенклатура"
         left join price pr on pr."номенклатура" = mov."номенклатура"
         where mov."лицо" = {@лицо}
     )

@@ -7,14 +7,14 @@ class Provider:
         query = """
     select 
         p.*
-        , n."@номенклатура"
+        , n."номенклатура"
         , n."наименование"
         , n."описание"
         , n."категория"
         , n."цена"
         , n."фото"
     from "пост" p
-    left join "номенклатура" n on n."@номенклатура" = p."номенклатура" 
+    left join "номенклатура" n on n."номенклатура" = p."номенклатура" 
     where "@пост" = {@пост} and p."лицо" = {@лицо} and "удален" is not true
     """
         return Sql.exec(query=query, args=args)
@@ -24,14 +24,14 @@ class Provider:
         query = """
     select  
         p.*
-        , n."@номенклатура"
+        , n."номенклатура"
         , n."наименование"
         , n."описание"
         , n."категория"
         , n."цена"
         , n."фото"
     from пост p
-    left join "номенклатура" n on n."@номенклатура" = p."номенклатура"
+    left join "номенклатура" n on n."номенклатура" = p."номенклатура"
     where p."лицо" = {@лицо} and p."удален" is not true
     """
         return Sql.exec(query=query, args=args)

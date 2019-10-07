@@ -35,7 +35,7 @@ class TestPosts(unittest.TestCase):
 
     def test_nomenclature(self):
         data = {
-            names.face_id: 1
+            names.face_id: 3
         }
         answer = nom_processor.get_nomenclature(data)
         data[names.post_id] = answer[0].get(names.post_id)
