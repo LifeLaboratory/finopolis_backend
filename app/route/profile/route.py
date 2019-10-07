@@ -19,6 +19,7 @@ class Profile(BaseRouter):
 
     def put(self, id_user):
         self._read_args()
-        self.data.update({names.ID_USER: id_user})
+        if id_user:
+            self.data.update({names.ID_USER: id_user})
         answer = update_profile(self.data)
         return answer or {}

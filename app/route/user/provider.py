@@ -35,5 +35,4 @@ class Provider:
     '{фото}')
     returning "@лицо"
     """
-        print(query)
         return Sql.exec(query=query, args=args)
