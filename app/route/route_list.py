@@ -2,6 +2,8 @@ from app.route.user.route import Auth, Register
 from app.route.profile.route import Profile
 from app.route.posts.route import Posts
 from app.route.nomenclature.route import Nomenclature
+from app.route.movements.route import Movement
+from app.route.socnetwork.route import Socnetwork
 
 
 ROUTES = {
