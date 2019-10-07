@@ -14,10 +14,11 @@ def get_post(args):
             get_nomenclature(answer)
     elif args.get(names.face_id):
         answer = provider.get_all_post(args)
-        for ans in answer:
-            if ans.get(names.date_time):
-                ans[names.date_time] = ans.get(names.date_time).strftime("%Y-%m-%d %H:%M")
-            get_nomenclature(ans)
+        if answer:
+            for ans in answer:
+                if ans.get(names.date_time):
+                    ans[names.date_time] = ans.get(names.date_time).strftime("%Y-%m-%d %H:%M")
+                get_nomenclature(ans)
     return answer or {}
 
 

@@ -115,7 +115,7 @@ nom_text = 'описание'
 nom_category = 'категория'
 nom_price = 'цена'
 nom_photo = 'фото'
-
+qty = 'количество'
 nom_field = [nom_id, nom_name, nom_text, nom_category, nom_price, nom_photo]
 
 face_id = "@лицо"

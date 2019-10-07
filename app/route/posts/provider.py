@@ -32,7 +32,7 @@ class Provider:
         , n."фото"
     from пост p
     left join "номенклатура" n on n."@номенклатура" = p."номенклатура"
-    where p."лицо" = {@лицо} and "удален" is not true
+    where p."лицо" = {@лицо} and p."удален" is not true
     """
         return Sql.exec(query=query, args=args)
 
