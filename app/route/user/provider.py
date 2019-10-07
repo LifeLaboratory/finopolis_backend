@@ -37,3 +37,12 @@ class Provider:
     """
         print(query)
         return Sql.exec(query=query, args=args)
+
+    @staticmethod
+    def get_user_id(args):
+        query = """
+    select "@лицо"
+    from "лицо"
+    where "логин" = '{логин}'
+                """
+        return Sql.exec(query=query, args=args)
