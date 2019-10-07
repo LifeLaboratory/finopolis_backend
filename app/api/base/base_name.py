@@ -107,7 +107,17 @@ it = "номенклатура"
 date_time = "датавремя"
 post_deleted = 'удален'
 post_draft = 'черновик'
+face = 'лицо'
+nom_id = '@номенклатура'
+nom_name = 'наименование'
+nom_text = 'описание'
+nom_category = 'категория'
+nom_price = 'цена'
+nom_photo = 'фото'
 
+nom_field = [nom_id, nom_name, nom_text, nom_category, nom_price, nom_photo]
+
+face_id = "@лицо"
 
 print_form_fields = [
     INN,

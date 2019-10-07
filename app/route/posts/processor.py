@@ -3,17 +3,30 @@ from app.api.base import base_name as names
 
 
 def get_post(args):
+    answer = None
     provider = Provider()
     if args.get(names.post_id):
-        answer = provider.get_post(args)[0]
-        if answer.get(names.date_time):
-            answer[names.date_time] = answer.get(names.date_time).strftime("%Y-%m-%d %H:%M")
-    else:
+        answer = provider.get_post(args)
+        if answer:
+            answer = answer[0]
+            if answer.get(names.date_time):
+                answer[names.date_time] = answer.get(names.date_time).strftime("%Y-%m-%d %H:%M")
+            get_nomenclature(answer)
+    elif args.get(names.face_id):
         answer = provider.get_all_post(args)
         for ans in answer:
             if ans.get(names.date_time):
                 ans[names.date_time] = ans.get(names.date_time).strftime("%Y-%m-%d %H:%M")
-    return answer
+            get_nomenclature(ans)
+    return answer or {}
+
+
+def get_nomenclature(data):
+    nomenclature = {}
+    for field in names.nom_field:
+        nomenclature[field] = data.get(field)
+        data.pop(field)
+        data['номенклатура'] = nomenclature
 
 
 def update_post(args):
