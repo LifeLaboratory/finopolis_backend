@@ -120,6 +120,8 @@ nom_text = 'описание'
 nom_category = 'категория'
 nom_price = 'цена'
 nom_photo = 'фото'
+movement = 'movement'
+client = 'клиент'
 
 socnet_id = '@соцсеть'
 socnet = 'соцсеть'

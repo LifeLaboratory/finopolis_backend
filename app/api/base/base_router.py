@@ -1,5 +1,7 @@
 # coding=utf-8
+import json
 from flask_restful import Resource, reqparse
+from app.api.base import base_name as names
 
 
 class BaseRouter(Resource):
@@ -15,6 +17,8 @@ class BaseRouter(Resource):
         for arg in self.args:
             self._parser.add_argument(arg)
         self.data = self._parser.parse_args()
+        if reqparse.request.data:
+            self.data[names.movement] = json.loads(reqparse.request.data.decode()).get(names.movement)
 
     def get(self):
         return "OK", 200, {'Access-Control-Allow-Origin': '*'}

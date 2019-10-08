@@ -5,18 +5,34 @@ class Provider:
     @staticmethod
     def get_nomenclature(args):
         query = """
-    select *
-    from "номенклатура"
-    where "номенклатура" = {номенклатура} and "лицо" = {@лицо}
+         with balances as (
+        select
+        "номенклатура",
+        sum("количество") "остаток" 
+        from "движение" group by "номенклатура"
+        )
+    select n.*, b."остаток"
+    from номенклатура n
+    left join balances b on b."номенклатура" = n."номенклатура"
+    where n."номенклатура" = {номенклатура} and n."лицо" = {@лицо}
+    order by "остаток" desc
     """
         return Sql.exec(query=query, args=args)
 
     @staticmethod
     def get_all_nomenclature(args):
         query = """
-    select *
-    from номенклатура
-    where "лицо" = {@лицо}
+        with balances as (
+        select
+        "номенклатура",
+        sum("количество") "остаток" 
+        from "движение" group by "номенклатура"
+        )
+    select n.*, coalesce(b."остаток", 0) "остаток"
+    from номенклатура n
+    left join balances b on b."номенклатура" = n."номенклатура"
+    where n."лицо" = {@лицо}
+    order by "остаток" desc
     """
         return Sql.exec(query=query, args=args)
 

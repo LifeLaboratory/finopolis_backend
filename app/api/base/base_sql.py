@@ -46,6 +46,12 @@ class Sql:
 
     @staticmethod
     def _query_exec_args(query, args):
+        for k, v in args.items():
+            alert_items = ["'", '"', ';', '-', '*', 'drop', 'select', '=', 'insert']
+            if isinstance(v, str):
+                for alert in alert_items:
+                    if alert in v:
+                        args[k] = args[k].replace(alert, '')
         query = query.format(**args)
         print(query)
         return Sql._exec(query)
