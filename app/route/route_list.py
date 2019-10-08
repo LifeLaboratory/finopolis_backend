@@ -4,6 +4,7 @@ from app.route.posts.route import Posts
 from app.route.nomenclature.route import Nomenclature
 from app.route.movements.route import Movement
 from app.route.socnetwork.route import Socnetwork
+from app.route.stats.route import Stats
 
 
 ROUTES = {
@@ -13,5 +14,6 @@ ROUTES = {
     '/nomenclature': Nomenclature,
     '/movements': Movement,
     '/profile/<int:id_user>': Profile,
-    '/socnetwork/': Socnetwork
+    '/socnetwork/': Socnetwork,
+    '/stats': Stats
 }

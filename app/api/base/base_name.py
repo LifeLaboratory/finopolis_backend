@@ -5,6 +5,8 @@ SUCCESS = "Success"
 ANSWER = "Answer"
 SESSION = 'session'
 
+STATS_POSTS_ID = "@статистика_постов"
+STATS_POSTS = "статистика_постов"
 DESCRIPTION = "описание"
 FIO = "фио"
 TITLE = "заголовок"
@@ -99,7 +101,10 @@ email = 'email'
 position = 'Должность'
 attestor = 'Свидетель'
 inn_attestor = 'СвидетельИНН'
-
+likes = 'лайки'
+views = 'просмотры'
+comments = 'комментарии'
+post = 'пост'
 post_id = "@пост"
 post_title = "заголовок"
 post_text = "текст"
