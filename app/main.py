@@ -27,9 +27,11 @@ def not_found(error):
 def bus_equal(profile):
     user_id = Provider.get_user_id({'логин': profile})
     answer = []
+    face = {}
     if user_id:
         answer = get_nomenclature(user_id[0])
-    return render_template('users.html', its=answer)
+        face = Provider.get_user_info(user_id[0])[0]
+    return render_template('users.html', its=answer, face=face)
 
 
 if __name__ == '__main__':

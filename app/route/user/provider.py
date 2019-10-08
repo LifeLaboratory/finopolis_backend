@@ -45,3 +45,12 @@ class Provider:
     where "логин" = '{логин}'
                 """
         return Sql.exec(query=query, args=args)
+
+    @staticmethod
+    def get_user_info(args):
+        query = """
+            select *
+            from "лицо"
+            where "@лицо" = '{@лицо}'
+                        """
+        return Sql.exec(query=query, args=args)
