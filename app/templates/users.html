@@ -60,13 +60,18 @@
     <div class="row" style="background-color: #ebebeb; height: 250px;">
         <div class="col-md-1"></div>
         <div class="col-md-2">
-            <img src="{{face.фото}}" style="height: 250px"/>
+            <img src="{{face.фото}}" style="max-width: 100%; margin-top: 50px;"/>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <br />
-            <h1 style="font-size: 20pt;">{{face.заголовок}}</h1>
-            <font style="font-size: 14pt;">{{face.описание}}</font>
+            <h1 style="font-size: 18pt;">{{face.заголовок}}</h1>
+            <font style="font-size: 12pt;">{{face.описание}}</font>
+            <br /><br />
+            <font style="font-size: 10pt;">Тел: {{face.номер}}</font>
+            <br />
+            <font style="font-size: 10pt;">Email: <a href="{{face.почта}}">{{face.почта}}</a></font>
         </div>
+        <div class="col-md-1"></div>
     </div>
     <hr style="width: 100%; background-color: #ff8001; margin:0;"/>
     <div class="row">
