@@ -48,6 +48,9 @@
         };
     });
 </script>
+<style>
+    body, html {background-color: #fff;}
+</style>
 <body ng-app="LIFE" ng-controller="LIFECtrl">
     <div class="row" style="background-color: #ebebeb; height: 30px;">
         <div class="col-md-11"></div>
@@ -75,14 +78,13 @@
     </div>
     <hr style="width: 100%; background-color: #ff8001; margin:0;"/>
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <center>
                 <ul class="list-inline">
                     {% for it in its %}
                         <li class="list-inline-item" style="margin: 25px;">
-                            <div class="card" style="width: 250px; border: 1px solid #ff8001;">
-                                <img src="{{it.фото}}" class="card-img-top" alt="...">
+                            <div class="card" style="width: 350px; border: 1px solid #ff8001;">
+                                <img src="{{it.фото}}" class="card-img-top" alt="..." style="width:100%;">
                                 <div class="card-body">
                                     <h5 class="card-title">{{it.наименование}}</h5>
                                     <p class="card-text">{{it.категория}}<br /><br />{{it.описание}}<br /><br /><b>Цена:</b> {{it.цена}} руб.</p>
@@ -95,7 +97,6 @@
                 </ul>
             </center>
         </div>
-        <div class="col-md-1"></div>
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
