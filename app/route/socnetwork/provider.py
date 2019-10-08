@@ -7,7 +7,7 @@ class Provider:
         query = """
          select *
          from соцсеть
-         where "@соцсеть" = {соцсеть}
+         where "@соцсеть" = %(соцсеть)d
         """
         return Sql.exec(query=query, args=args)
 
@@ -23,7 +23,7 @@ class Provider:
     def create_socnetwork(args):
         query = """
              insert into "соцсеть" ("наименование", "логин", "пароль", "ссылка")
-             values ('{наименование}', '{логин}', '{пароль}', '{ссылка}')
+             values ('%(наименование)s', '%(логин)s', '%(пароль)s', '%(ссылка)s')
              returning "@соцсеть"
         """
         return Sql.exec(query=query, args=args)
@@ -33,11 +33,11 @@ class Provider:
         query = """
              update соцсеть
              set
-             "наименование" = '{наименование}',
-             "логин" = '{логин}',
-             "пароль" = '{пароль}',
-             "ссылка" = '{ссылка}'
-             where "@соцсеть" = {соцсеть}
+             "наименование" = '%(наименование)s',
+             "логин" = '%(логин)s',
+             "пароль" = '%(пароль)s',
+             "ссылка" = '%(ссылка)s'
+             where "@соцсеть" = %(соцсеть)d
              returning "@соцсеть"
         """
         return Sql.exec(query=query, args=args)
