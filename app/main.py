@@ -12,10 +12,12 @@ from app.route.user.provider import Provider
 
 from flask import render_template
 
-_app = flask.Flask(__name__, static_folder="print_form")
+_app = flask.Flask(__name__, static_folder="static")
 _app.config['JSON_AS_ASCII'] = False
 api = Api(_app)
 HEADER = {'Access-Control-Allow-Origin': '*'}
+_app.jinja_env.auto_reload = True
+_app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 @_app.errorhandler(404)
@@ -31,7 +33,16 @@ def bus_equal(profile):
     if user_id:
         answer = get_nomenclature(user_id[0])
         face = Provider.get_user_info(user_id[0])[0]
-    return render_template('users.html', its=answer, face=face)
+    new_answer = []
+    for tmp in answer:
+        obj = tmp
+        tmp['title'] = obj['наименование']
+        tmp['category'] = obj['категория']
+        tmp['description'] = obj['описание']
+        tmp['price'] = obj['цена']
+        tmp['photo'] = obj['фото']
+        new_answer.append(tmp)
+    return render_template('users.html', its=new_answer, face=face)
 
 
 if __name__ == '__main__':

@@ -2,22 +2,124 @@
 <html>
 <head>
 	<title>Главная страница</title>
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css" />
 </head>
-<body>
-{{face.заголовок}}
-{{face.описание}}
-{% for it in its %}
-  {{ it.номенклатура }}
-  {{ it.наименование }}
-  {{ it.описание }}
-  {{ it.категория }}
-  {{ it.цена }}
-  {{ it.фото }}
-  {{ it.лицо }}
-  {{ it.удален }}
-{% endfor %}
+<script type="text/javascript">
+    var app = angular.module("LIFE", ['ngMaterial'])
+        .config(function($interpolateProvider) {
+            $interpolateProvider.startSymbol('{[{');
+            $interpolateProvider.endSymbol('}]}');
+        });
+    app.controller("LIFECtrl", function($scope, $http) {
+        $scope.shopcard = [];
+        $scope.add_to_shopcard = function (obj) {
+            $scope.shopcard.push(obj);
+            console.log($scope.shopcard);
+            alert("Добавлено в корзину");
+        };
+        
+        $scope.toQIWI = function () {
+            price = 0
+            $scope.shopcard.forEach(function(item, i, arr) {
+                price += item.price;
+            });
+            location.href = "https://qiwi.com/payment/form/99?extra%5B%27account%27%5D=+79607871971&amountInteger=" + price +
+            "&amountFraction=0&extra%5B%27comment%27%5D=Покупка товаров в {{face.заголовок}}&currency=643&blocked=account,comment,sum"
+        };
+    });
+</script>
+<body ng-app="LIFE" ng-controller="LIFECtrl">
+    <div class="row" style="background-color: #ebebeb; height: 30px;">
+        <div class="col-md-11"></div>
+        <div class="col-md-1" style="background-color: #f2c496;" data-toggle="modal" data-target="#exampleModal" >
+            <font style="font-size: 12pt">500 руб</font>
+            <img src="/static/shopcard.png" style="height: 20px"/>
+        </div>
+    </div>
+    <hr style="width: 100%; background-color: #ff8001; margin:0;"/>
+    <div class="row" style="background-color: #ebebeb; height: 250px;">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <img src="{{face.фото}}" style="height: 250px"/>
+        </div>
+        <div class="col-md-9">
+            <br />
+            <h1 style="font-size: 20pt;">{{face.заголовок}}</h1>
+            <font style="font-size: 14pt;">{{face.описание}}</font>
+        </div>
+    </div>
+    <hr style="width: 100%; background-color: #ff8001; margin:0;"/>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <center>
+                <ul class="list-inline">
+                    {% for it in its %}
+                        <li class="list-inline-item" style="margin: 25px;">
+                            <div class="card" style="width: 250px; border: 1px solid #ff8001;">
+                                <img src="{{it.фото}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{it.наименование}}</h5>
+                                    <p class="card-text">{{it.категория}}<br /><br />{{it.описание}}<br /><br /><b>Цена:</b> {{it.цена}} руб.</p>
+                                    <a href="#" class="btn btn-primary" style="background-color: #ffb46a; border: 1px solid #ffb46a;"
+                                        ng-click="add_to_shopcard({{it}})">Купить</a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </center>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Корзина</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li style="margin: 25px; list-style: none;" ng-repeat="item in shopcard">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="{[{item.photo}]}" class="card-img-top" style="max-height: 50px;" alt="...">
+                                </div>
+                                <div class="col-md-6">
+                                    <b class="card-title">{[{item.title}]}</b>
+                                </div>
+                                <div class="col-md-3">
+                                    <b>Цена:</b> {[{item.price}]} руб.
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" style="background-color: #ffb46a; border: 1px solid #ffb46a;" ng-click="toQIWI()">Оплатить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{#  {{ it.номенклатура }}#}
+{#  {{ it.описание }}#}
+{#  {{ it.категория }}#}
+{#  {{ it.лицо }}#}
+{#  {{ it.удален }}#}
 </body>
 </html>
