@@ -27,12 +27,14 @@ class Provider:
     @staticmethod
     def register_user(args):
         query = """
-    insert into "лицо"("логин", "пароль", "фио", "описание", "фото") 
+    insert into "лицо"("логин", "пароль", "фио", "описание", "фото", "почта", "номер") 
     VALUES ('{логин}', 
     '{пароль}', 
     '{фио}',
     '{описание}',
-    '{фото}')
+    '{фото}', 
+    '{почта}', 
+    '{номер}')
     returning "@лицо"
     """
         return Sql.exec(query=query, args=args)
