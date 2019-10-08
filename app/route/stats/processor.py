@@ -14,12 +14,8 @@ def get_stat(args):
 
 def update_stat(args):
     provider = Provider()
-
-    if args.get(names.STATS_POSTS_ID):
+    if args.get(names.STATS_POSTS):
         answer = provider.update_stat(args)
     else:
         answer = provider.create_stat(args)
     return answer
-
-
-#Доделать всё.

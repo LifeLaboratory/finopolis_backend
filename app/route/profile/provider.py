@@ -11,7 +11,7 @@ class Provider:
           , "заголовок"
           , "@лицо"
         from "лицо"
-        where "@лицо" = {лицо}
+        where "@лицо" = %(лицо)d
         """
         return Sql.exec(query=query, args=args)
 
@@ -19,11 +19,12 @@ class Provider:
     def update_profile(args):
         query = """
         update "лицо" 
-          set "фио" = '{фио}'
-            , "описание" = '{описание}'
-            , "фото" = '{фото}'
-            , "заголовок" = '{заголовок}'
-            , "статус" = {статус}
-          where "@лицо" = {лицо}
+          set "фио" = '%(фио)s'
+            , "описание" = '%(описание)s'
+            , "фото" = '%(фото)s'
+            , "заголовок" = '%(заголовок)s'
+            , "статус" = %(статус)r
+          where "@лицо" = %(лицо)d
+          returning "@лицо"
         """
         return Sql.exec(query=query, args=args)
