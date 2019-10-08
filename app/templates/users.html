@@ -22,19 +22,29 @@
         });
     app.controller("LIFECtrl", function($scope, $http) {
         $scope.shopcard = [];
+        $scope.price = 0;
         $scope.add_to_shopcard = function (obj) {
             $scope.shopcard.push(obj);
             console.log($scope.shopcard);
             alert("Добавлено в корзину");
+            $scope.price += obj.price;
         };
         
         $scope.toQIWI = function () {
-            price = 0
+            price = 0;
             $scope.shopcard.forEach(function(item, i, arr) {
                 price += item.price;
             });
-            location.href = "https://qiwi.com/payment/form/99?extra%5B%27account%27%5D=+79607871971&amountInteger=" + price +
-            "&amountFraction=0&extra%5B%27comment%27%5D=Покупка товаров в {{face.заголовок}}&currency=643&blocked=account,comment,sum"
+            location.href = "https://qiwi.com/payment/form/99?extra%5B%27account%27%5D={{face.номер}}&amountInteger=" + price +
+            "&amountFraction=0&extra%5B%27comment%27%5D=Покупка товаров в {{face.заголовок}}&currency=643&blocked=account,comment,sum";
+            $http({
+                method: 'POST',
+                url: '/movements',
+                dataType: 'json',
+                data: {
+                    movement: $scope.shopcard
+                }
+            });
         };
     });
 </script>
@@ -42,7 +52,7 @@
     <div class="row" style="background-color: #ebebeb; height: 30px;">
         <div class="col-md-11"></div>
         <div class="col-md-1" style="background-color: #f2c496;" data-toggle="modal" data-target="#exampleModal" >
-            <font style="font-size: 12pt">500 руб</font>
+            <font style="font-size: 12pt">{[{price}]} руб</font>
             <img src="/static/shopcard.png" style="height: 20px"/>
         </div>
     </div>
@@ -50,13 +60,18 @@
     <div class="row" style="background-color: #ebebeb; height: 250px;">
         <div class="col-md-1"></div>
         <div class="col-md-2">
-            <img src="{{face.фото}}" style="height: 250px"/>
+            <img src="{{face.фото}}" style="max-width: 100%; margin-top: 50px;"/>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <br />
-            <h1 style="font-size: 20pt;">{{face.заголовок}}</h1>
-            <font style="font-size: 14pt;">{{face.описание}}</font>
+            <h1 style="font-size: 18pt;">{{face.заголовок}}</h1>
+            <font style="font-size: 12pt;">{{face.описание}}</font>
+            <br /><br />
+            <font style="font-size: 10pt;">Тел: {{face.номер}}</font>
+            <br />
+            <font style="font-size: 10pt;">Email: <a href="{{face.почта}}">{{face.почта}}</a></font>
         </div>
+        <div class="col-md-1"></div>
     </div>
     <hr style="width: 100%; background-color: #ff8001; margin:0;"/>
     <div class="row">
